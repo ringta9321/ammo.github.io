@@ -1,13 +1,22 @@
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 
--- Enable noclip at the start
-for _, part in ipairs(character:GetDescendants()) do
-    if part:IsA("BasePart") then
-        part.CanCollide = false -- Disable collision
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+local player = Players.LocalPlayer
+
+local function noclip()
+    if player.Character then
+        for _, part in pairs(player.Character:GetDescendants()) do
+            if part:IsA("BasePart") then
+                part.CanCollide = false
+            end
+        end
     end
 end
-print("Noclip enabled at the beginning!")
+
+RunService.Stepped:Connect(noclip)
 
 local humanoid = character:WaitForChild("Humanoid") -- Ensure Humanoid exists
 
