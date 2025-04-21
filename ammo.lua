@@ -1,6 +1,14 @@
--- Get the player's character and humanoid
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
+
+-- Enable noclip at the start
+for _, part in ipairs(character:GetDescendants()) do
+    if part:IsA("BasePart") then
+        part.CanCollide = false -- Disable collision
+    end
+end
+print("Noclip enabled at the beginning!")
+
 local humanoid = character:WaitForChild("Humanoid") -- Ensure Humanoid exists
 
 -- Get the Camera
